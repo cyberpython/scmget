@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Scmget by cyberpython</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Scmget</h1>
+      <h2 class="project-tagline">Simple utility (and Java library) to retrieve tagged source code from one or more projects under SCM.</h2>
+      <a href="https://github.com/cyberpython/scmget" class="btn">View on GitHub</a>
+      <a href="https://github.com/cyberpython/scmget/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/cyberpython/scmget/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="scmget" class="anchor" href="#scmget" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>scmget</h1>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h2>
+
+<p><code>scmget</code> is a simple Java application and library that clones / checks out 
+tagged code from SCM systems. Currently only Git and CVS are supported.</p>
+
+<p>The user has to provide information about the server, the repository and/or 
+module, the tag and the credentials to be used.
+For multiple projects an XML file can be used.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="command-line-usage" class="anchor" href="#command-line-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Command-line usage</h3>
+
+<pre><code> scmget [command] [command options]
+</code></pre>
+
+<p>Commands and options:</p>
+
+<pre><code>xml      Perform multiple checkouts specified in an XML file
+  Usage: xml [options]
+    Options:
+    * --file
+         The XML file to use as input
+
+git      Checkout tagged a tagged project from a Git repository
+  Usage: git [options]
+    Options:
+    * --pass
+         The password to use to connect to the Git server
+    * --tag
+         The tag to checkout
+    * --targetDir
+         The target absolute filesystem path
+    * --url
+         The Git repository URL
+    * --user
+         The username to use to connect to the Git server
+
+cvs      Checkout a tagged module from a CVS repository
+  Usage: cvs [options]
+    Options:
+    * --cvsroot
+         The root of the CVS repository
+    * --host
+         The hostname or IP address of the CVS server
+    * --module
+         The CVS module to checkout
+    * --pass
+         The password to use to connect to the Git server
+    * --tag
+         The tag to checkout
+    * --targetDir
+         The target absolute filesystem path
+    * --user
+         The username to use to connect to the Git server
+</code></pre>
+
+<h3>
+<a id="sample-xml-configuration-file" class="anchor" href="#sample-xml-configuration-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample XML configuration file</h3>
+
+<pre><code> &lt;configuration&gt;
+
+   &lt;git url="https://testuser@gitserver/git/MyAwesomeProject.git" 
+        username="testuser" 
+        password="mypassword" 
+        target-dir="/home/jdoe/builds/myawesomeproj"
+        tag="v0.2"
+   /&gt;
+
+   &lt;cvs host="mycvsserver"
+        cvsroot="/var/lib/CVSROOT"
+        module="myawesomelib"
+        username="testuser"
+        password="mypassword"
+        target-dir="//home/jdoe/builds/deplib_1"
+        tag="TAG_TEST_1"
+   /&gt;
+ &lt;/configuration&gt;
+</code></pre>
+
+<h3>
+<a id="why-would-i-need-it" class="anchor" href="#why-would-i-need-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why would I need it???</h3>
+
+<p>You can use it to checkout the source code for a project and associated source 
+dependencies e.g. to perform a release.</p>
+
+<h2>
+<a id="build-instructions" class="anchor" href="#build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build instructions</h2>
+
+<p>Clone the git repository, change into the project's directory and execute:</p>
+
+<pre><code>./gradlew distZip
+</code></pre>
+
+<p>or on Windows:</p>
+
+<pre><code>gradlew.bat distZip
+</code></pre>
+
+<p>A ZIP archive containing the executable JAR file, all dependencies and launcher 
+scripts should be created under <code>build/distributions</code> .</p>
+
+<h2>
+<a id="dependencies-and-used-libraries" class="anchor" href="#dependencies-and-used-libraries" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies and used libraries</h2>
+
+<ul>
+<li><a href="https://commons.apache.org/proper/commons-io/">Apache Commons IO</a></li>
+<li><a href="https://eclipse.org/jgit/">JGit (and its dependencies)</a></li>
+<li><a href="http://jcommander.org/">JCommander</a></li>
+<li><a href="https://netbeans.org/projects/versioncontrol/downloads/download/org-netbeans-lib-cvsclient.jar">Netbeans CVS client</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright 2016 Georgios Migdos</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/cyberpython/scmget">Scmget</a> is maintained by <a href="https://github.com/cyberpython">cyberpython</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
