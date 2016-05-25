@@ -77,7 +77,7 @@ public class GitCommand implements ScmCommand {
 
     @Override
     public String getErrorMessage() {
-        return String.format("Failed to clone %s and checkout %", getUrl(), getTag());
+        return String.format("Failed to clone %s and checkout %s", getUrl(), getTag());
     }
 
 }

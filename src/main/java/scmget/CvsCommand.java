@@ -92,7 +92,7 @@ public class CvsCommand implements ScmCommand {
 
     @Override
     public String getErrorMessage() {
-        return String.format("Failed to checkout %s:/%s : %s%", getHost(), getCvsroot(), getModule(), getTag());
+        return String.format("Failed to checkout %s:/%s : %s (%s)", getHost(), getCvsroot(), getModule(), getTag());
     }
 
 }
