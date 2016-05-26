@@ -48,7 +48,7 @@ public class GitCommand implements ScmCommand {
     private String password;
 
     @XmlAttribute(name="target-dir", required = true)
-    @Parameter(names = "--targetDir", required = true, description = "The target absolute filesystem path")
+    @Parameter(names = "--targetDir", required = true, description = "The target absolute or relative filesystem path (relative paths should start with './' or '.\\')")
     private String targetDir;
 
     public String getUrl() {

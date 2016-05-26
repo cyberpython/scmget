@@ -30,7 +30,7 @@ Commands and options:
         * --tag
              The tag to checkout
         * --targetDir
-             The target absolute filesystem path
+             The target absolute or relative filesystem path (relative paths should start with './' or '.\\')
         * --url
              The Git repository URL
         * --user
@@ -46,13 +46,13 @@ Commands and options:
         * --module
              The CVS module to checkout
         * --pass
-             The password to use to connect to the Git server
+             The password to use to connect to the CVS server
         * --tag
              The tag to checkout
         * --targetDir
-             The target absolute filesystem path
+             The relative path where code will be checked out to (should start with './' or '.\').
         * --user
-             The username to use to connect to the Git server
+             The username to use to connect to the CVS server
 
 ### Sample XML configuration file
 

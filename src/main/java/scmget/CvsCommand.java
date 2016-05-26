@@ -55,7 +55,7 @@ public class CvsCommand implements ScmCommand {
     private String password;
 
     @XmlAttribute(name="target-dir", required = true)
-    @Parameter(names = "--targetDir", required = true, description = "The target absolute filesystem path")
+    @Parameter(names = "--targetDir", required = true, description = "The relative path where code will be checked out to (should start with './' or '.\\').")
     private String targetDir;
 
     public String getHost() {
