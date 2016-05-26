@@ -92,6 +92,7 @@ public class Scmget {
                 CheckoutCommand cmd = new CheckoutCommand(true, cvsModule);
                 cmd.setCheckoutByRevision(tagName);
                 cmd.setCheckoutDirectory(targetDir);
+                cmd.setPruneDirectories(true);
                 return client.executeCommand(cmd, globalOptions);
             } catch (CommandException ce) {
                 ce.printStackTrace();
