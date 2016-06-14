@@ -3,10 +3,24 @@
 ## Description
 `scmget` is a simple Java application and library that clones / checks out 
 tagged code from SCM systems. Currently only Git and CVS are supported.
+CVS checkouts are performed in a temporary directory and then this directory is
+merged with the target directory (if it exists) in order to facilitate the 
+checkout of multiple checkouts of differently tagged subtrees of a module.
 
 The user has to provide information about the server, the repository and/or 
 module, the tag and the credentials to be used.
 For multiple projects an XML file can be used.
+
+The credentials are provided in the `scmget_credentials.xml` file located
+in the user's home directory.
+
+### Sample scmget_credentials.xml file
+
+     <credentials>
+        <git host="gitserver" username="testuser" password="mypassword"/>
+        <cvs host="mycvsserver" username="testuser" password="mypassword"/>
+        <cvs host="myothercvsserver" username="testuser2" password="mypassword2"/>
+     </credentials>
 
 ## Usage
 
@@ -25,16 +39,12 @@ Commands and options:
     git      Checkout tagged a tagged project from a Git repository
       Usage: git [options]
         Options:
-        * --pass
-             The password to use to connect to the Git server
         * --tag
              The tag to checkout
         * --targetDir
-             The target absolute or relative filesystem path (relative paths should start with './' or '.\\')
+             The target absolute or relative filesystem path
         * --url
              The Git repository URL
-        * --user
-             The username to use to connect to the Git server
     
     cvs      Checkout a tagged module from a CVS repository
       Usage: cvs [options]
@@ -45,22 +55,16 @@ Commands and options:
              The hostname or IP address of the CVS server
         * --module
              The CVS module to checkout
-        * --pass
-             The password to use to connect to the CVS server
         * --tag
              The tag to checkout
         * --targetDir
-             The relative path where code will be checked out to (should start with './' or '.\').
-        * --user
-             The username to use to connect to the CVS server
+             The target absolute or relative filesystem path
 
 ### Sample XML configuration file
 
      <configuration>
        
        <git url="https://testuser@gitserver/git/MyAwesomeProject.git" 
-            username="testuser" 
-            password="mypassword" 
             target-dir="/home/jdoe/builds/myawesomeproj"
             tag="v0.2"
        />
@@ -68,8 +72,6 @@ Commands and options:
        <cvs host="mycvsserver"
             cvsroot="/var/lib/CVSROOT"
             module="myawesomelib"
-            username="testuser"
-            password="mypassword"
             target-dir="//home/jdoe/builds/deplib_1"
             tag="TAG_TEST_1"
        />

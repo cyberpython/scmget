@@ -25,4 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public interface ScmCommand {
     public boolean apply();
     public String getErrorMessage();
+    public CredentialsStore getCredentialsStore();
+    public void setCredentialsStore(CredentialsStore credentialsStore);
 }

@@ -1,7 +1,7 @@
 apply plugin: 'application'
 
 sourceCompatibility = 1.6
-version = '0.0.2'
+version = '0.0.3'
 mainClassName = "scmget.Scmget"
 
 repositories {
