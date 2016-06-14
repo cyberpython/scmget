@@ -26,11 +26,27 @@
 <a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h2>
 
 <p><code>scmget</code> is a simple Java application and library that clones / checks out 
-tagged code from SCM systems. Currently only Git and CVS are supported.</p>
+tagged code from SCM systems. Currently only Git and CVS are supported.
+CVS checkouts are performed in a temporary directory and then this directory is
+merged with the target directory (if it exists) in order to facilitate the 
+checkout of multiple checkouts of differently tagged subtrees of a module.</p>
 
 <p>The user has to provide information about the server, the repository and/or 
 module, the tag and the credentials to be used.
 For multiple projects an XML file can be used.</p>
+
+<p>The credentials are provided in the <code>scmget_credentials.xml</code> file located
+in the user's home directory.</p>
+
+<h3>
+<a id="sample-scmget_credentialsxml-file" class="anchor" href="#sample-scmget_credentialsxml-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sample scmget_credentials.xml file</h3>
+
+<pre><code> &lt;credentials&gt;
+    &lt;git host="gitserver" username="testuser" password="mypassword"/&gt;
+    &lt;cvs host="mycvsserver" username="testuser" password="mypassword"/&gt;
+    &lt;cvs host="myothercvsserver" username="testuser2" password="mypassword2"/&gt;
+ &lt;/credentials&gt;
+</code></pre>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
@@ -52,16 +68,12 @@ For multiple projects an XML file can be used.</p>
 git      Checkout tagged a tagged project from a Git repository
   Usage: git [options]
     Options:
-    * --pass
-         The password to use to connect to the Git server
     * --tag
          The tag to checkout
     * --targetDir
-         The target absolute or relative filesystem path (relative paths should start with './' or '.\\')
+         The target absolute or relative filesystem path
     * --url
          The Git repository URL
-    * --user
-         The username to use to connect to the Git server
 
 cvs      Checkout a tagged module from a CVS repository
   Usage: cvs [options]
@@ -72,14 +84,10 @@ cvs      Checkout a tagged module from a CVS repository
          The hostname or IP address of the CVS server
     * --module
          The CVS module to checkout
-    * --pass
-         The password to use to connect to the CVS server
     * --tag
          The tag to checkout
     * --targetDir
-         The relative path where code will be checked out to (should start with './' or '.\').
-    * --user
-         The username to use to connect to the CVS server
+         The target absolute or relative filesystem path
 </code></pre>
 
 <h3>
@@ -88,8 +96,6 @@ cvs      Checkout a tagged module from a CVS repository
 <pre><code> &lt;configuration&gt;
 
    &lt;git url="https://testuser@gitserver/git/MyAwesomeProject.git" 
-        username="testuser" 
-        password="mypassword" 
         target-dir="/home/jdoe/builds/myawesomeproj"
         tag="v0.2"
    /&gt;
@@ -97,8 +103,6 @@ cvs      Checkout a tagged module from a CVS repository
    &lt;cvs host="mycvsserver"
         cvsroot="/var/lib/CVSROOT"
         module="myawesomelib"
-        username="testuser"
-        password="mypassword"
         target-dir="//home/jdoe/builds/deplib_1"
         tag="TAG_TEST_1"
    /&gt;
